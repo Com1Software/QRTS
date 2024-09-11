@@ -61,4 +61,16 @@ func main() {
 
 	// Fraction as pulse width expressed between 0.0 `MinPulse` and 1.0 `MaxPulse`
 	servo0.Fraction(0.5)
+	servo1.Fraction(0.5)
+	servo2.Fraction(0.5)
+	servo3.Fraction(0.5)
+	servo4.Fraction(0.5)
+	servo5.Fraction(0.5)
+	servo6.Fraction(0.5)
+	servo7.Fraction(0.5)
+	servo8.Fraction(0.5)
+	servo9.Fraction(0.5)
+	servo10.Fraction(0.5)
+	servo11.Fraction(0.5)
+
 }
