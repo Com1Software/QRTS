@@ -7,6 +7,20 @@ import (
 	"github.com/googolgl/go-i2c"
 	"github.com/googolgl/go-pca9685"
 )
+type ServoArray struct {
+	Servo1   int
+	Servo2   int
+	Servo3   int
+	Servo4   int
+	Servo5   int
+	Servo6   int
+	Servo7   int
+	Servo8   int
+	Servo9   int
+	Servo10   int
+	Servo11   int
+	Servo12   int
+}
 
 // ----------------------------------------- Main
 func main() {
