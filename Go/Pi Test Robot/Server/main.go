@@ -6,31 +6,15 @@ import (
 	"runtime"
 	"time"
 )
-
-//-------------------------------------------------------------------------
-func main() {
-	agent := SSE()
-	fmt.Println("Test Server Sent Events ")
-	fmt.Printf("Operating System : %s\n", runtime.GOOS)
-
-	go func() {
-		for {
-			time.Sleep(time.Second * 2)
-			event := fmt.Sprintf(" %v\n", time.Now())
-			agent.Notifier <- []byte(event)
-		}
-	}()
-
-	http.ListenAndServe("localhost:8080", agent)
-
-}
-
+//--------------------------------------------------------
 type Agent struct {
 	Notifier    chan []byte
 	newuser     chan chan []byte
 	closinguser chan chan []byte
 	user        map[chan []byte]bool
 }
+
+//-------------------------------------------------------
 
 func SSE() (agent *Agent) {
 	agent = &Agent{
@@ -83,5 +67,23 @@ func (agent *Agent) listen() {
 			}
 		}
 	}
+
+}
+
+//------------------------------------------------------------------ Main
+func main() {
+	agent := SSE()
+	fmt.Println("Test Server Sent Events ")
+	fmt.Printf("Operating System : %s\n", runtime.GOOS)
+
+	go func() {
+		for {
+			time.Sleep(time.Second * 2)
+			event := fmt.Sprintf(" %v\n", time.Now())
+			agent.Notifier <- []byte(event)
+		}
+	}()
+
+	http.ListenAndServe("localhost:8080", agent)
 
 }
