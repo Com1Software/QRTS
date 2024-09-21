@@ -7,19 +7,29 @@ import (
 	"github.com/googolgl/go-i2c"
 	"github.com/googolgl/go-pca9685"
 )
+
+// --------------------------------------
+
 type ServoArray struct {
-	Servo1   int
-	Servo2   int
-	Servo3   int
-	Servo4   int
-	Servo5   int
-	Servo6   int
-	Servo7   int
-	Servo8   int
-	Servo9   int
-	Servo10   int
-	Servo11   int
-	Servo12   int
+	Servo1  int
+	Servo2  int
+	Servo3  int
+	Servo4  int
+	Servo5  int
+	Servo6  int
+	Servo7  int
+	Servo8  int
+	Servo9  int
+	Servo10 int
+	Servo11 int
+	Servo12 int
+}
+
+type CommandCtl struct {
+	cmdlines  []string
+	cmd       string
+	cmdpos    int
+	cmdstatus string
 }
 
 // ----------------------------------------- Main
@@ -46,45 +56,53 @@ func main() {
 	servo10 := pca0.ServoNew(10, nil)
 	servo11 := pca0.ServoNew(11, nil)
 	servo12 := pca0.ServoNew(12, nil)
+	cmdctl := []CommandCtl{}
+	cmdctla := CommandCtl{}
+	sa := []ServoArray{}
+	saa := ServoArray{}
 
-	// Angle in degrees. Must be in the range `0` to `Range`
-	for i := 0; i < 130; i++ {
-		if leg == 1 || leg == 0 {
-			servo1.Angle(i)
-			servo2.Angle(i)
-			servo3.Angle(i)
-		}
-		if leg == 2 || leg == 0 {
-			servo4.Angle(i)
-			servo5.Angle(i)
-			servo6.Angle(i)
-		}
-		if leg == 3 || leg == 0 {
-			servo7.Angle(i)
-			servo8.Angle(i)
-			servo9.Angle(i)
-		}
-		if leg == 4 || leg == 0 {
-			servo10.Angle(i)
-			servo11.Angle(i)
-			servo12.Angle(i)
+	dz := false
+	if dz {
+
+		// Angle in degrees. Must be in the range `0` to `Range`
+		for i := 0; i < 130; i++ {
+			if leg == 1 || leg == 0 {
+				servo1.Angle(i)
+				servo2.Angle(i)
+				servo3.Angle(i)
+			}
+			if leg == 2 || leg == 0 {
+				servo4.Angle(i)
+				servo5.Angle(i)
+				servo6.Angle(i)
+			}
+			if leg == 3 || leg == 0 {
+				servo7.Angle(i)
+				servo8.Angle(i)
+				servo9.Angle(i)
+			}
+			if leg == 4 || leg == 0 {
+				servo10.Angle(i)
+				servo11.Angle(i)
+				servo12.Angle(i)
+			}
+
+			time.Sleep(10 * time.Millisecond)
 		}
 
-		time.Sleep(10 * time.Millisecond)
+		// Fraction as pulse width expressed between 0.0 `MinPulse` and 1.0 `MaxPulse`
+
+		servo1.Fraction(0.5)
+		servo2.Fraction(0.5)
+		servo3.Fraction(0.5)
+		servo4.Fraction(0.5)
+		servo5.Fraction(0.5)
+		servo6.Fraction(0.5)
+		servo7.Fraction(0.5)
+		servo8.Fraction(0.5)
+		servo9.Fraction(0.5)
+		servo10.Fraction(0.5)
+		servo11.Fraction(0.5)
+		servo12.Fraction(0.5)
 	}
-
-	// Fraction as pulse width expressed between 0.0 `MinPulse` and 1.0 `MaxPulse`
-
-	servo1.Fraction(0.5)
-	servo2.Fraction(0.5)
-	servo3.Fraction(0.5)
-	servo4.Fraction(0.5)
-	servo5.Fraction(0.5)
-	servo6.Fraction(0.5)
-	servo7.Fraction(0.5)
-	servo8.Fraction(0.5)
-	servo9.Fraction(0.5)
-	servo10.Fraction(0.5)
-	servo11.Fraction(0.5)
-	servo12.Fraction(0.5)
 }
