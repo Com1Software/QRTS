@@ -2,10 +2,13 @@ package main
 
 import (
 	"fmt"
+	"log"
+	"net"
 	"net/http"
 	"runtime"
 	"time"
 )
+
 //--------------------------------------------------------
 type Agent struct {
 	Notifier    chan []byte
@@ -70,11 +73,25 @@ func (agent *Agent) listen() {
 
 }
 
+func GetOutboundIP() net.IP {
+	conn, err := net.Dial("udp", "8.8.8.8:80")
+	if err != nil {
+		log.Fatal(err)
+	}
+	defer conn.Close()
+
+	localAddr := conn.LocalAddr().(*net.UDPAddr)
+
+	return localAddr.IP
+}
+
 //------------------------------------------------------------------ Main
 func main() {
 	agent := SSE()
 	fmt.Println("Test Server Sent Events ")
 	fmt.Printf("Operating System : %s\n", runtime.GOOS)
+	xip := fmt.Sprintf("%s", GetOutboundIP())
+	port := "8080"
 
 	go func() {
 		for {
@@ -84,6 +101,11 @@ func main() {
 		}
 	}()
 
-	http.ListenAndServe("localhost:8080", agent)
+	fmt.Printf("Listening at  : %s Port : %s\n", xip, port)
+	if runtime.GOOS == "windows" {
+		http.ListenAndServe(":"+port, agent)
+	} else {
+		http.ListenAndServe(xip+":"+port, agent)
+	}
 
 }
