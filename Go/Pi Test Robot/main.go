@@ -35,7 +35,7 @@ func ServoTest1(xip string) string {
 	xdata = xdata + "<html>"
 	xdata = xdata + "<head>"
 	//------------------------------------------------------------------------
-	xdata = xdata + "<title>About Page</title>"
+	xdata = xdata + "<title>Servo Test 1</title>"
 	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
 	//------------------------------------------------------------------------
 	xdata = DateTimeDisplay(xdata)
@@ -213,7 +213,7 @@ func TestPage(xip string) string {
 
 }
 
-//-------------------------------------------------- Functions
+// -------------------------------------------------- Functions
 // Openbrowser : Opens default web browser to specified url
 func Openbrowser(url string) error {
 	var cmd string
