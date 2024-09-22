@@ -6,6 +6,7 @@ import (
 	"net/http"
 	"os/exec"
 	"runtime"
+	"time"
 
 	"fmt"
 	"os"
@@ -419,6 +420,24 @@ func main() {
 		//------------------------------------------------ Servo Test 1
 		http.HandleFunc("/servotest1", func(w http.ResponseWriter, r *http.Request) {
 			xdata := ServoTest1(xip)
+			for i := 0; i < 130; i++ {
+				servo1.Angle(i)
+				servo2.Angle(i)
+				servo3.Angle(i)
+				servo4.Angle(i)
+				servo5.Angle(i)
+				servo6.Angle(i)
+				servo7.Angle(i)
+				servo8.Angle(i)
+				servo9.Angle(i)
+				servo10.Angle(i)
+				servo11.Angle(i)
+				servo12.Angle(i)
+
+				time.Sleep(10 * time.Millisecond)
+			}
+
+			// Fract
 			fmt.Fprint(w, xdata)
 		})
 		//------------------------------------------------- Start Server
