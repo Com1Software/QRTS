@@ -376,21 +376,41 @@ func GetOutboundIP() net.IP {
 
 func ServoTesta(sa ServoArray) {
 	for i := 0; i < 130; i++ {
-		sa.Servo1.Angle(i)
-		sa.Servo2.Angle(i)
-		sa.Servo3.Angle(i)
-		sa.Servo4.Angle(i)
-		sa.Servo5.Angle(i)
-		sa.Servo6.Angle(i)
-		sa.Servo7.Angle(i)
-		sa.Servo8.Angle(i)
-		sa.Servo9.Angle(i)
-		sa.Servo10.Angle(i)
-		sa.Servo11.Angle(i)
-		sa.Servo12.Angle(i)
-
+		sa = SetAllServoPositions(sa, i)
+		SetServoPositions(sa)
 		time.Sleep(10 * time.Millisecond)
 	}
+}
+func SetAllServoPositions(sa ServoArray, setpos int) ServoArray {
+	sa.Servo1pos = setpos
+	sa.Servo2pos = setpos
+	sa.Servo3pos = setpos
+	sa.Servo4pos = setpos
+	sa.Servo5pos = setpos
+	sa.Servo6pos = setpos
+	sa.Servo7pos = setpos
+	sa.Servo8pos = setpos
+	sa.Servo9pos = setpos
+	sa.Servo10pos = setpos
+	sa.Servo11pos = setpos
+	sa.Servo12pos = setpos
+	return sa
+
+}
+
+func SetServoPositions(sa ServoArray) {
+	sa.Servo1.Angle(sa.Servo1pos)
+	sa.Servo2.Angle(sa.Servo2pos)
+	sa.Servo3.Angle(sa.Servo3pos)
+	sa.Servo4.Angle(sa.Servo4pos)
+	sa.Servo5.Angle(sa.Servo5pos)
+	sa.Servo6.Angle(sa.Servo6pos)
+	sa.Servo7.Angle(sa.Servo7pos)
+	sa.Servo8.Angle(sa.Servo8pos)
+	sa.Servo9.Angle(sa.Servo9pos)
+	sa.Servo10.Angle(sa.Servo10pos)
+	sa.Servo11.Angle(sa.Servo11pos)
+	sa.Servo12.Angle(sa.Servo12pos)
 }
 
 // ----------------------------------------------------------------
@@ -455,6 +475,10 @@ func main() {
 		http.HandleFunc("/servotest1", func(w http.ResponseWriter, r *http.Request) {
 			xdata := ServoTest1(xip)
 			ServoTesta(sa[0])
+			//sa[0] = SetAllServoPositions(sa[0], 45)
+			//SetServoPositions(sa[0])
+			//sa[0] = SetAllServoPositions(sa[0], 75)
+			//SetServoPositions(sa[0])
 			fmt.Fprint(w, xdata)
 		})
 		//------------------------------------------------- Start Server
