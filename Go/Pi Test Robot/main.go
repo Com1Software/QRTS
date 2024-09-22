@@ -18,18 +18,30 @@ import (
 //------------------------------------------ Structs
 
 type ServoArray struct {
-	Servo1  int
-	Servo2  int
-	Servo3  int
-	Servo4  int
-	Servo5  int
-	Servo6  int
-	Servo7  int
-	Servo8  int
-	Servo9  int
-	Servo10 int
-	Servo11 int
-	Servo12 int
+	Servo1     *pca9685.Servo
+	Servo1pos  int
+	Servo2     *pca9685.Servo
+	Servo2pos  int
+	Servo3     *pca9685.Servo
+	Servo3pos  int
+	Servo4     *pca9685.Servo
+	Servo4pos  int
+	Servo5     *pca9685.Servo
+	Servo5pos  int
+	Servo6     *pca9685.Servo
+	Servo6pos  int
+	Servo7     *pca9685.Servo
+	Servo7pos  int
+	Servo8     *pca9685.Servo
+	Servo8pos  int
+	Servo9     *pca9685.Servo
+	Servo9pos  int
+	Servo10    *pca9685.Servo
+	Servo10pos int
+	Servo11    *pca9685.Servo
+	Servo11pos int
+	Servo12    *pca9685.Servo
+	Servo12pos int
 }
 
 // ----------------------------------------------------------------
@@ -362,6 +374,25 @@ func GetOutboundIP() net.IP {
 	return localAddr.IP
 }
 
+func ServoTesta(sa ServoArray) {
+	for i := 0; i < 130; i++ {
+		sa.Servo1.Angle(i)
+		sa.Servo2.Angle(i)
+		sa.Servo3.Angle(i)
+		sa.Servo4.Angle(i)
+		sa.Servo5.Angle(i)
+		sa.Servo6.Angle(i)
+		sa.Servo7.Angle(i)
+		sa.Servo8.Angle(i)
+		sa.Servo9.Angle(i)
+		sa.Servo10.Angle(i)
+		sa.Servo11.Angle(i)
+		sa.Servo12.Angle(i)
+
+		time.Sleep(10 * time.Millisecond)
+	}
+}
+
 // ----------------------------------------------------------------
 func main() {
 	fmt.Println("Pi Test Robot")
@@ -377,18 +408,21 @@ func main() {
 		log.Fatal(err)
 	}
 	pca0.SetChannel(0, 0, 130)
-	servo1 := pca0.ServoNew(1, nil)
-	servo2 := pca0.ServoNew(2, nil)
-	servo3 := pca0.ServoNew(3, nil)
-	servo4 := pca0.ServoNew(4, nil)
-	servo5 := pca0.ServoNew(5, nil)
-	servo6 := pca0.ServoNew(6, nil)
-	servo7 := pca0.ServoNew(7, nil)
-	servo8 := pca0.ServoNew(8, nil)
-	servo9 := pca0.ServoNew(9, nil)
-	servo10 := pca0.ServoNew(10, nil)
-	servo11 := pca0.ServoNew(11, nil)
-	servo12 := pca0.ServoNew(12, nil)
+	sa := []ServoArray{}
+	saa := ServoArray{}
+	sa = append(sa, saa)
+	sa[0].Servo1 = pca0.ServoNew(1, nil)
+	sa[0].Servo2 = pca0.ServoNew(2, nil)
+	sa[0].Servo3 = pca0.ServoNew(3, nil)
+	sa[0].Servo4 = pca0.ServoNew(4, nil)
+	sa[0].Servo5 = pca0.ServoNew(5, nil)
+	sa[0].Servo6 = pca0.ServoNew(6, nil)
+	sa[0].Servo7 = pca0.ServoNew(7, nil)
+	sa[0].Servo8 = pca0.ServoNew(8, nil)
+	sa[0].Servo9 = pca0.ServoNew(9, nil)
+	sa[0].Servo10 = pca0.ServoNew(10, nil)
+	sa[0].Servo11 = pca0.ServoNew(11, nil)
+	sa[0].Servo12 = pca0.ServoNew(12, nil)
 
 	switch {
 	//-------------------------------------------------------------
@@ -420,24 +454,7 @@ func main() {
 		//------------------------------------------------ Servo Test 1
 		http.HandleFunc("/servotest1", func(w http.ResponseWriter, r *http.Request) {
 			xdata := ServoTest1(xip)
-			for i := 0; i < 130; i++ {
-				servo1.Angle(i)
-				servo2.Angle(i)
-				servo3.Angle(i)
-				servo4.Angle(i)
-				servo5.Angle(i)
-				servo6.Angle(i)
-				servo7.Angle(i)
-				servo8.Angle(i)
-				servo9.Angle(i)
-				servo10.Angle(i)
-				servo11.Angle(i)
-				servo12.Angle(i)
-
-				time.Sleep(10 * time.Millisecond)
-			}
-
-			// Fract
+			ServoTesta(sa[0])
 			fmt.Fprint(w, xdata)
 		})
 		//------------------------------------------------- Start Server
@@ -446,17 +463,17 @@ func main() {
 			panic(err)
 		}
 	}
-	servo1.Fraction(0.5)
-	servo2.Fraction(0.5)
-	servo3.Fraction(0.5)
-	servo4.Fraction(0.5)
-	servo5.Fraction(0.5)
-	servo6.Fraction(0.5)
-	servo7.Fraction(0.5)
-	servo8.Fraction(0.5)
-	servo9.Fraction(0.5)
-	servo10.Fraction(0.5)
-	servo11.Fraction(0.5)
-	servo12.Fraction(0.5)
+	sa[0].Servo1.Fraction(0.5)
+	sa[0].Servo2.Fraction(0.5)
+	sa[0].Servo3.Fraction(0.5)
+	sa[0].Servo4.Fraction(0.5)
+	sa[0].Servo5.Fraction(0.5)
+	sa[0].Servo6.Fraction(0.5)
+	sa[0].Servo7.Fraction(0.5)
+	sa[0].Servo8.Fraction(0.5)
+	sa[0].Servo9.Fraction(0.5)
+	sa[0].Servo10.Fraction(0.5)
+	sa[0].Servo11.Fraction(0.5)
+	sa[0].Servo12.Fraction(0.5)
 
 }
