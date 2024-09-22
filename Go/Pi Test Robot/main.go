@@ -10,80 +10,65 @@ import (
 	"os"
 )
 
-// ----------------------------------------------------------------
-func main() {
-	fmt.Println("Go Web Server")
-	fmt.Printf("Operating System : %s\n", runtime.GOOS)
-	xip := fmt.Sprintf("%s", GetOutboundIP())
-	port := "8080"
-	switch {
-	//-------------------------------------------------------------
-	case len(os.Args) == 2:
+//------------------------------------------ Structs
 
-		fmt.Println("Not")
-
-		//-------------------------------------------------------------
-	default:
-
-		fmt.Println("Server running....")
-		fmt.Println("Listening on " + xip + ":" + port)
-
-		fmt.Println("")
-		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
-			xdata := InitPage(xip)
-			fmt.Fprint(w, xdata)
-		})
-		//------------------------------------------------ About Page Handler
-		http.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
-			xdata := AboutPage()
-			fmt.Fprint(w, xdata)
-		})
-		//------------------------------------------------ PlayGround Page Handler
-		http.HandleFunc("/playground", func(w http.ResponseWriter, r *http.Request) {
-			xdata := PlayGroundPage()
-			fmt.Fprint(w, xdata)
-		})
-		//------------------------------------------------ Display Page Handler
-		http.HandleFunc("/display", func(w http.ResponseWriter, r *http.Request) {
-			xdata := DisplayPage()
-			fmt.Fprint(w, xdata)
-		})
-		//------------------------------------------------ Test Page Handler
-		http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
-			xdata := TestPage(xip)
-			fmt.Fprint(w, xdata)
-		})
-
-		//------------------------------------------------- Static Handler Handler
-		fs := http.FileServer(http.Dir("static/"))
-		http.Handle("/static/", http.StripPrefix("/static/", fs))
-		//------------------------------------------------- Start Server
-		Openbrowser(xip + ":" + port)
-		if err := http.ListenAndServe(xip+":"+port, nil); err != nil {
-			panic(err)
-		}
-	}
+type ServoArray struct {
+	Servo1  int
+	Servo2  int
+	Servo3  int
+	Servo4  int
+	Servo5  int
+	Servo6  int
+	Servo7  int
+	Servo8  int
+	Servo9  int
+	Servo10 int
+	Servo11 int
+	Servo12 int
 }
 
-// Openbrowser : Opens default web browser to specified url
-func Openbrowser(url string) error {
-	var cmd string
-	var args []string
-	switch runtime.GOOS {
-	case "windows":
-		cmd = "cmd"
-		args = []string{"/c", "start msedge"}
-	case "linux":
-		cmd = "chromium-browser"
-		args = []string{""}
+// ----------------------------------------------------------------
+func ServoTest1(xip string) string {
 
-	case "darwin":
-		cmd = "open"
-	default:
-		cmd = "xdg-open"
-	}
-	args = append(args, url)
-	return exec.Command(cmd, args...).Start()
+	//----------------------------------------------------------------------------
+	xdata := "<!DOCTYPE html>"
+	xdata = xdata + "<html>"
+	xdata = xdata + "<head>"
+	//------------------------------------------------------------------------
+	xdata = xdata + "<title>About Page</title>"
+	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
+	//------------------------------------------------------------------------
+	xdata = DateTimeDisplay(xdata)
+	xdata = xdata + "<style>"
+	xdata = xdata + "body {"
+	xdata = xdata + "    background-color: red;"
+	xdata = xdata + "}"
+	xdata = xdata + "	h1 {"
+	xdata = xdata + "	color: white;"
+	xdata = xdata + "	text-align: center;"
+	xdata = xdata + "}"
+	xdata = xdata + "	p {"
+	xdata = xdata + "font-family: verdana;"
+	xdata = xdata + "	font-size: 20px;"
+	xdata = xdata + "}"
+	xdata = xdata + "</style>"
+	xdata = xdata + "</head>"
+	//------------------------------------------------------------------------
+	xdata = xdata + "<body onload='startTime()'>"
+	xdata = xdata + "<p>Pi Test Robot</p>"
+	xdata = xdata + "<div id='txtdt'></div>"
+	//---------
+	xdata = xdata + "<BR>  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  "
+	xdata = xdata + "  <A HREF='https://github.com/Com1Software/QRTS'> [ QRTS GitHub Repository ] </A>  "
+	xdata = xdata + "<BR><BR>"
+	xdata = xdata + "Pi Test Robot"
+	//------------------------------------------------------------------------
+
+	//------------------------------------------------------------------------
+	xdata = xdata + " </body>"
+	xdata = xdata + " </html>"
+	return xdata
+
 }
 
 func InitPage(xip string) string {
@@ -94,13 +79,13 @@ func InitPage(xip string) string {
 	xdata = xdata + "<html>"
 	xdata = xdata + "<head>"
 	//------------------------------------------------------------------------
-	xdata = xdata + "<title>PI Robot Test</title>"
+	xdata = xdata + "<title>PI Test Robot</title>"
 	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
 	//------------------------------------------------------------------------
 	xdata = xdata + "</head>"
 	//------------------------------------------------------------------------
 	xdata = xdata + "<body>"
-	xdata = xdata + "<H1>Pi Robot Test.</H1>"
+	xdata = xdata + "<H1>Pi Test Robot</H1>"
 	//---------
 	host, _ := os.Hostname()
 	addrs, _ := net.LookupIP(host)
@@ -112,14 +97,10 @@ func InitPage(xip string) string {
 	xdata = xdata + "<p> Host Port IP : " + xip
 	xdata = xdata + "<BR> Machine IP : " + xxip + "</p>"
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/about'> [ About ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/playground'> [ PlayGround ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/display'> [ Display ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/test'> [ Testing ] </A>  "
-	xdata = xdata + "  <BR>  Static :"
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/static/test123.html'> [ Test123 ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/static/index.html'> [ Index ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/static/testdev.html'> [ TestDev ] </A>  "
-	xdata = xdata + "<BR><BR>Go Web Server...."
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/test'> [ Testing ] </A><BR>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest1'> [ Servo Test 1 ] </A>  "
+
+	xdata = xdata + "<BR><BR>Pi Test Robot"
 	//------------------------------------------------------------------------
 	xdata = xdata + " </body>"
 	xdata = xdata + " </html>"
@@ -127,7 +108,7 @@ func InitPage(xip string) string {
 }
 
 // ----------------------------------------------------------------
-func AboutPage() string {
+func AboutPage(xip string) string {
 	//---------------------------------------------------------------------------
 
 	//----------------------------------------------------------------------------
@@ -155,12 +136,13 @@ func AboutPage() string {
 	xdata = xdata + "</head>"
 	//------------------------------------------------------------------------
 	xdata = xdata + "<body onload='startTime()'>"
-	xdata = xdata + "<p>Go Web Server</p>"
+	xdata = xdata + "<p>Pi Test Robot</p>"
 	xdata = xdata + "<div id='txtdt'></div>"
 	//---------
-	xdata = xdata + "  <A HREF='https://github.com/Com1Software/Test-GoWebServer'> [ GoWebServer GitHub Repository ] </A>  "
-	xdata = xdata + "<BR>"
-	xdata = xdata + "Go Web Server"
+	xdata = xdata + " <BR> <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  "
+	xdata = xdata + "  <A HREF='https://github.com/Com1Software/QRTS'> [ QRTS GitHub Repository ] </A>  "
+	xdata = xdata + "<BR><BR>"
+	xdata = xdata + "Pi Test Robot"
 	//------------------------------------------------------------------------
 
 	//------------------------------------------------------------------------
@@ -216,9 +198,9 @@ func TestPage(xip string) string {
 	xdata = xdata + "<div id='txtloop'></div>"
 	//---------
 	xdata = xdata + "<center>"
-	xdata = xdata + "<p1>Go Web Server</p1>"
+	xdata = xdata + "<p1>Pi Test Robot</p1>"
 	xdata = xdata + "<BR>"
-	xdata = xdata + "<p2>Go Web Server</p2>"
+	xdata = xdata + "<p2>Pi Test Robot</p2>"
 	xdata = xdata + "</center>"
 
 	//------------------------------------------------------------------------
@@ -231,113 +213,26 @@ func TestPage(xip string) string {
 
 }
 
-// ----------------------------------------------------------------
-func DisplayPage() string {
-	//---------------------------------------------------------------------------
+//-------------------------------------------------- Functions
+// Openbrowser : Opens default web browser to specified url
+func Openbrowser(url string) error {
+	var cmd string
+	var args []string
+	switch runtime.GOOS {
+	case "windows":
+		cmd = "cmd"
+		args = []string{"/c", "start msedge"}
+	case "linux":
+		cmd = "chromium-browser"
+		args = []string{""}
 
-	//----------------------------------------------------------------------------
-	xdata := "<!DOCTYPE html>"
-	xdata = xdata + "<html>"
-	xdata = xdata + "<head>"
-	//------------------------------------------------------------------------
-	xdata = xdata + "<title>Display Page</title>"
-	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
-	//------------------------------------------------------------------------
-	xdata = DateTimeDisplay(xdata)
-	xdata = xdata + "<style>"
-	xdata = xdata + "body {"
-	xdata = xdata + "    background-color: black;"
-	xdata = xdata + "}"
-	xdata = xdata + "	h1 {"
-	xdata = xdata + "	color: white;"
-	xdata = xdata + "	text-align: center;"
-	xdata = xdata + "}"
-	xdata = xdata + "	p1 {"
-	xdata = xdata + "color: green;"
-	xdata = xdata + "font-family: verdana;"
-	xdata = xdata + "	font-size: 20px;"
-	xdata = xdata + "}"
-	xdata = xdata + "	p2 {"
-	xdata = xdata + "color: red;"
-	xdata = xdata + "font-family: verdana;"
-	xdata = xdata + "	font-size: 20px;"
-	xdata = xdata + "}"
-	xdata = xdata + "	div {"
-	xdata = xdata + "color: white;"
-	xdata = xdata + "font-family: verdana;"
-	xdata = xdata + "	font-size: 20px;"
-	xdata = xdata + "	text-align: center;"
-	xdata = xdata + "}"
-	xdata = xdata + "</style>"
-	xdata = xdata + "</head>"
-	//------------------------------------------------------------------------
-	xdata = xdata + "<body onload='startTime()'>"
-	xdata = xdata + "<H1>Display Page</H1>"
-	xdata = xdata + "<div id='txtdt'></div>"
-	//---------
-	xdata = xdata + "<center>"
-	xdata = xdata + "<p1>Go Web Server</p1>"
-	xdata = xdata + "<BR>"
-	xdata = xdata + "<p2>Go Web Server</p2>"
-	xdata = xdata + "</center>"
-
-	//------------------------------------------------------------------------
-
-	//------------------------------------------------------------------------
-	xdata = xdata + " </body>"
-	xdata = xdata + " </html>"
-	return xdata
-
-}
-
-// ----------------------------------------------------------------
-// ----------------------------------------------------------------
-func PlayGroundPage() string {
-	//---------------------------------------------------------------------------
-
-	//----------------------------------------------------------------------------
-	xdata := "<!DOCTYPE html>"
-	xdata = xdata + "<html>"
-	xdata = xdata + "<head>"
-	//------------------------------------------------------------------------
-	xdata = xdata + "<title>The PlayGround</title>"
-	xdata = xdata + "  <link REL='StyleSheet' TYPE='text/css' HREF='static/css/style.css'>"
-	//------------------------------------------------------------------------
-	xdata = DateTimeDisplay(xdata)
-	//------------------------------------------------------------------------
-	xdata = xdata + "</head>"
-	//------------------------------------------------------------------------
-	xdata = xdata + "<body onload='startTime()'>"
-	xdata = xdata + "<p>The PlayGround.</p>"
-	xdata = xdata + "<div id='txt'></div>"
-	xdata = xdata + "<p id='demo1'></p>"
-	xdata = xdata + "<button onclick='myFunction1()'>Click me 1</button> - "
-	xdata = xdata + "<button onclick='myFunction2()'>Click me 2</button>"
-	xdata = xdata + "<p id='demo2'></p>"
-	xdata = xdata + "<div id='txtdt'></div>"
-
-	//---------
-	xdata = xdata + "Go Web Server"
-
-	//------------------------------------------------------------------------
-	xdata = xdata + "<script>"
-	//----------
-	xdata = xdata + " function myFunction1() {"
-	xdata = xdata + "document.getElementById('demo1').innerHTML = 'Hello<BR> World';"
-	xdata = xdata + "document.getElementById('demo2').innerHTML = 'Hello<BR> World';"
-	xdata = xdata + "  }"
-	//----------
-	xdata = xdata + " function myFunction2() {"
-	xdata = xdata + "document.getElementById('demo1').innerHTML = 'Hello World 2 Upper screen stuff';"
-	xdata = xdata + "document.getElementById('demo2').innerHTML = 'Hello World 2 Lower screen stuff';"
-	xdata = xdata + "  }"
-	//----------
-	xdata = xdata + "</script>"
-	//------------------------------------------------------------------------
-	xdata = xdata + " </body>"
-	xdata = xdata + " </html>"
-	return xdata
-
+	case "darwin":
+		cmd = "open"
+	default:
+		cmd = "xdg-open"
+	}
+	args = append(args, url)
+	return exec.Command(cmd, args...).Start()
 }
 
 func DateTimeDisplay(xdata string) string {
@@ -460,4 +355,50 @@ func GetOutboundIP() net.IP {
 	localAddr := conn.LocalAddr().(*net.UDPAddr)
 
 	return localAddr.IP
+}
+
+// ----------------------------------------------------------------
+func main() {
+	fmt.Println("Go Web Server")
+	fmt.Printf("Operating System : %s\n", runtime.GOOS)
+	xip := fmt.Sprintf("%s", GetOutboundIP())
+	port := "8080"
+	switch {
+	//-------------------------------------------------------------
+	case len(os.Args) == 2:
+
+		fmt.Println("Not")
+
+		//-------------------------------------------------------------
+	default:
+
+		fmt.Println("Server running....")
+		fmt.Println("Listening on " + xip + ":" + port)
+
+		fmt.Println("")
+		http.HandleFunc("/", func(w http.ResponseWriter, r *http.Request) {
+			xdata := InitPage(xip)
+			fmt.Fprint(w, xdata)
+		})
+		//------------------------------------------------ About Page Handler
+		http.HandleFunc("/about", func(w http.ResponseWriter, r *http.Request) {
+			xdata := AboutPage(xip)
+			fmt.Fprint(w, xdata)
+		})
+		//------------------------------------------------ Test Page Handler
+		http.HandleFunc("/test", func(w http.ResponseWriter, r *http.Request) {
+			xdata := TestPage(xip)
+			fmt.Fprint(w, xdata)
+		})
+		//------------------------------------------------ Servo Test 1
+		http.HandleFunc("/servotest1", func(w http.ResponseWriter, r *http.Request) {
+			xdata := ServoTest1(xip)
+			fmt.Fprint(w, xdata)
+		})
+		//------------------------------------------------- Start Server
+		Openbrowser(xip + ":" + port)
+		if err := http.ListenAndServe(xip+":"+port, nil); err != nil {
+			panic(err)
+		}
+	}
 }
