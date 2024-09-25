@@ -526,7 +526,7 @@ func main() {
 		http.HandleFunc("/servotest2", func(w http.ResponseWriter, r *http.Request) {
 			xdata := ServoTest1(xip)
 			//	sa[0] = SetAllServoPositions(sa[0], 65)
-			sa[0] = SetLevelServoPositions(sa[0], 0, 3)
+			sa[0] = SetLevelServoPositions(sa[0], 115, 3)
 
 			SetServoPositions(sa[0])
 			// time.Sleep(1000 * time.Millisecond)
