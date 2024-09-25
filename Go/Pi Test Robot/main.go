@@ -477,7 +477,7 @@ func main() {
 			sa[0] = SetAllServoPositions(sa[0], 65)
 			SetServoPositions(sa[0])
 			time.Sleep(1000 * time.Millisecond)
-			ServoTesta(sa[0])
+			//	ServoTesta(sa[0])
 			//sa[0] = SetAllServoPositions(sa[0], 75)
 			//SetServoPositions(sa[0])
 			fmt.Fprint(w, xdata)
