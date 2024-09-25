@@ -3,11 +3,11 @@ package main
 import (
 	"log"
 	"net/http"
+	"robot/html"
+	"robot/model"
+	"robot/servo"
+	"robot/utils"
 	"runtime"
-	"test/html"
-	"test/model"
-	"test/servo"
-	"test/utils"
 
 	"fmt"
 	"os"
