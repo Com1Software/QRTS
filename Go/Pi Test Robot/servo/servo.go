@@ -1,7 +1,7 @@
 package servo
 
 import (
-	"test/model"
+	"robot/model"
 	"time"
 )
 
