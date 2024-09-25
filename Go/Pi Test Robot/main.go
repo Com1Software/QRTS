@@ -415,13 +415,26 @@ func SetLevelServoPositions(sa ServoArray, setpos int, level int) ServoArray {
 
 	case level == 3:
 		sa.Servo3pos = setpos
-		sa.Servo6pos = setpos
+		sa.Servo6pos = ReversePosition(setpos)
 		sa.Servo9pos = setpos
-		sa.Servo12pos = setpos
+		sa.Servo12pos = ReversePosition(setpos)
 
 	}
 	return sa
 
+}
+
+func ReversePosition(pos int) int {
+	rpos := 0
+	switch {
+	case pos > 65:
+		rpos = pos - 65
+	case pos < 65:
+		rpos = 130 - pos
+	default:
+		rpos = pos
+	}
+	return rpos
 }
 
 func SetServoPositions(sa ServoArray) {
