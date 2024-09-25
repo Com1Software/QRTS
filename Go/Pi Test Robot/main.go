@@ -116,6 +116,7 @@ func InitPage(xip string) string {
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/about'> [ About ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/test'> [ Testing ] </A><BR>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest1'> [ Servo Test 1 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest2'> [ Servo Test 2 ] </A>  "
 
 	xdata = xdata + "<BR><BR>Pi Test Robot"
 	//------------------------------------------------------------------------
@@ -398,6 +399,31 @@ func SetAllServoPositions(sa ServoArray, setpos int) ServoArray {
 
 }
 
+func SetLevelServoPositions(sa ServoArray, setpos int, level int) ServoArray {
+	switch {
+	case level == 1:
+		sa.Servo1pos = setpos
+		sa.Servo4pos = setpos
+		sa.Servo7pos = setpos
+		sa.Servo10pos = setpos
+
+	case level == 2:
+		sa.Servo2pos = setpos
+		sa.Servo5pos = setpos
+		sa.Servo8pos = setpos
+		sa.Servo11pos = setpos
+
+	case level == 3:
+		sa.Servo3pos = setpos
+		sa.Servo6pos = setpos
+		sa.Servo9pos = setpos
+		sa.Servo12pos = setpos
+
+	}
+	return sa
+
+}
+
 func SetServoPositions(sa ServoArray) {
 	sa.Servo1.Angle(sa.Servo1pos)
 	sa.Servo2.Angle(sa.Servo2pos)
@@ -475,13 +501,28 @@ func main() {
 		http.HandleFunc("/servotest1", func(w http.ResponseWriter, r *http.Request) {
 			xdata := ServoTest1(xip)
 			sa[0] = SetAllServoPositions(sa[0], 65)
+
 			SetServoPositions(sa[0])
-			time.Sleep(1000 * time.Millisecond)
+			//time.Sleep(1000 * time.Millisecond)
 			//	ServoTesta(sa[0])
 			//sa[0] = SetAllServoPositions(sa[0], 75)
 			//SetServoPositions(sa[0])
 			fmt.Fprint(w, xdata)
 		})
+		// ------------------------------------------------ Servo Test 1
+		http.HandleFunc("/servotest2", func(w http.ResponseWriter, r *http.Request) {
+			xdata := ServoTest1(xip)
+			//	sa[0] = SetAllServoPositions(sa[0], 65)
+			sa[0] = SetLevelServoPositions(sa[0], 0, 3)
+
+			SetServoPositions(sa[0])
+			// time.Sleep(1000 * time.Millisecond)
+			//	ServoTesta(sa[0])
+			//sa[0] = SetAllServoPositions(sa[0], 75)
+			//SetServoPositions(sa[0])
+			fmt.Fprint(w, xdata)
+		})
+
 		//------------------------------------------------- Start Server
 		Openbrowser(xip + ":" + port)
 		if err := http.ListenAndServe(xip+":"+port, nil); err != nil {
