@@ -2,13 +2,15 @@ package html
 
 import (
 	"net"
+	"robot/model"
+	"strconv"
 
 	"fmt"
 	"os"
 )
 
 // ----------------------------------------------------------------
-func ServoTest(xip string) string {
+func ServoTest(xip string, sa model.ServoArray) string {
 
 	//----------------------------------------------------------------------------
 	xdata := "<!DOCTYPE html>"
@@ -41,6 +43,19 @@ func ServoTest(xip string) string {
 	xdata = xdata + "<BR>  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  <BR><BR>"
 	xdata = xdata + "  <A HREF='https://github.com/Com1Software/QRTS'> [ QRTS GitHub Repository ] </A>  "
 	xdata = xdata + "<BR><BR>"
+	xdata = xdata + "Servo 1 Position " + strconv.Itoa(sa.Servo1pos) + "<BR>"
+	xdata = xdata + "Servo 2 Position " + strconv.Itoa(sa.Servo2pos) + "<BR>"
+	xdata = xdata + "Servo 3 Position " + strconv.Itoa(sa.Servo3pos) + "<BR><BR>"
+	xdata = xdata + "Servo 4 Position " + strconv.Itoa(sa.Servo4pos) + "<BR>"
+	xdata = xdata + "Servo 5 Position " + strconv.Itoa(sa.Servo5pos) + "<BR>"
+	xdata = xdata + "Servo 6 Position " + strconv.Itoa(sa.Servo6pos) + "<BR><BR>"
+	xdata = xdata + "Servo 7 Position " + strconv.Itoa(sa.Servo7pos) + "<BR>"
+	xdata = xdata + "Servo 8 Position " + strconv.Itoa(sa.Servo8pos) + "<BR>"
+	xdata = xdata + "Servo 9 Position " + strconv.Itoa(sa.Servo9pos) + "<BR><BR>"
+	xdata = xdata + "Servo 10 Position " + strconv.Itoa(sa.Servo10pos) + "<BR>"
+	xdata = xdata + "Servo 11 Position " + strconv.Itoa(sa.Servo11pos) + "<BR>"
+	xdata = xdata + "Servo 12 Position " + strconv.Itoa(sa.Servo12pos) + "<BR><BR>"
+
 	xdata = xdata + "Pi Test Robot"
 	//------------------------------------------------------------------------
 
@@ -80,6 +95,10 @@ func InitPage(xip string) string {
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/test'> [ Testing ] </A><BR>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest1'> [ Servo Test 1 ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest2'> [ Servo Test 2 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest3'> [ Servo Test 3 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest4'> [ Servo Test 4 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest5'> [ Servo Test 5 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest6'> [ Servo Test 6 ] </A>  "
 
 	xdata = xdata + "<BR><BR>Pi Test Robot"
 	//------------------------------------------------------------------------
