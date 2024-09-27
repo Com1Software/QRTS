@@ -8,7 +8,7 @@ import (
 )
 
 // ----------------------------------------------------------------
-func ServoTest1(xip string) string {
+func ServoTest(xip string) string {
 
 	//----------------------------------------------------------------------------
 	xdata := "<!DOCTYPE html>"
@@ -21,7 +21,7 @@ func ServoTest1(xip string) string {
 	xdata = DateTimeDisplay(xdata)
 	xdata = xdata + "<style>"
 	xdata = xdata + "body {"
-	xdata = xdata + "    background-color: red;"
+	xdata = xdata + "    background-color: green;"
 	xdata = xdata + "}"
 	xdata = xdata + "	h1 {"
 	xdata = xdata + "	color: white;"
@@ -38,7 +38,7 @@ func ServoTest1(xip string) string {
 	xdata = xdata + "<p>Pi Test Robot</p>"
 	xdata = xdata + "<div id='txtdt'></div>"
 	//---------
-	xdata = xdata + "<BR>  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  "
+	xdata = xdata + "<BR>  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  <BR><BR>"
 	xdata = xdata + "  <A HREF='https://github.com/Com1Software/QRTS'> [ QRTS GitHub Repository ] </A>  "
 	xdata = xdata + "<BR><BR>"
 	xdata = xdata + "Pi Test Robot"
