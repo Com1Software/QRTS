@@ -76,27 +76,14 @@ func main() {
 		})
 		//------------------------------------------------ Servo Test 1
 		http.HandleFunc("/servotest1", func(w http.ResponseWriter, r *http.Request) {
-			xdata := html.ServoTest1(xip)
+			xdata := html.ServoTest(xip)
 			sa[0] = servo.SetAllServoPositions(sa[0], 65)
-
-			servo.SetServoPositions(sa[0])
-			//time.Sleep(1000 * time.Millisecond)
-			//	ServoTesta(sa[0])
-			//sa[0] = SetAllServoPositions(sa[0], 75)
-			//SetServoPositions(sa[0])
 			fmt.Fprint(w, xdata)
 		})
 		// ------------------------------------------------ Servo Test 1
 		http.HandleFunc("/servotest2", func(w http.ResponseWriter, r *http.Request) {
-			xdata := html.ServoTest1(xip)
-			//	sa[0] = SetAllServoPositions(sa[0], 65)
+			xdata := html.ServoTest(xip)
 			sa[0] = servo.SetLevelServoPositions(sa[0], 115, 3)
-
-			servo.SetServoPositions(sa[0])
-			// time.Sleep(1000 * time.Millisecond)
-			//	ServoTesta(sa[0])
-			//sa[0] = SetAllServoPositions(sa[0], 75)
-			//SetServoPositions(sa[0])
 			fmt.Fprint(w, xdata)
 		})
 
