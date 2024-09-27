@@ -126,9 +126,9 @@ func MoveLevelServoPositionsDown(sa model.ServoArray, level int, startpos int, s
 				sa.Servo8pos = i
 			}
 
-			if i <= sa.Servo8pos {
-				sa.Servo8.Angle(ReversePosition(i))
-				sa.Servo8pos = ReversePosition(i)
+			if i <= sa.Servo11pos {
+				sa.Servo11.Angle(ReversePosition(i))
+				sa.Servo11pos = ReversePosition(i)
 			}
 		case level == 3:
 			if i <= sa.Servo3pos {
