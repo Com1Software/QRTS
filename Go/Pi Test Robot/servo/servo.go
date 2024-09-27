@@ -25,6 +25,7 @@ func SetAllServoPositions(sa model.ServoArray, setpos int) model.ServoArray {
 	sa.Servo10pos = setpos
 	sa.Servo11pos = setpos
 	sa.Servo12pos = setpos
+	SetServoPositions(sa)
 	return sa
 
 }
@@ -50,6 +51,7 @@ func SetLevelServoPositions(sa model.ServoArray, setpos int, level int) model.Se
 		sa.Servo12pos = ReversePosition(setpos)
 
 	}
+	SetServoPositions(sa)
 	return sa
 
 }
