@@ -83,3 +83,151 @@ func SetServoPositions(sa model.ServoArray) {
 	sa.Servo11.Angle(sa.Servo11pos)
 	sa.Servo12.Angle(sa.Servo12pos)
 }
+
+func MoveLevelServoPositionsDown(sa model.ServoArray, level int, startpos int, setpos int, mstimer time.Duration) model.ServoArray {
+
+	for i := startpos; i >= setpos; i-- {
+
+		switch {
+		case level == 1:
+			if i <= sa.Servo1pos {
+				sa.Servo1.Angle(i)
+				sa.Servo1pos = i
+			}
+			if i <= sa.Servo4pos {
+				sa.Servo4.Angle(i)
+				sa.Servo4pos = i
+			}
+			if i <= sa.Servo7pos {
+				sa.Servo7.Angle(i)
+				sa.Servo7pos = i
+			}
+
+			if i <= sa.Servo10pos {
+				sa.Servo10.Angle(i)
+				sa.Servo10pos = i
+			}
+
+		case level == 2:
+			if i <= sa.Servo2pos {
+				sa.Servo2.Angle(i)
+				sa.Servo2pos = i
+
+			}
+			if i <= sa.Servo5pos {
+				sa.Servo5.Angle(i)
+				sa.Servo5pos = i
+			}
+
+			if i <= sa.Servo8pos {
+				sa.Servo8.Angle(i)
+				sa.Servo8pos = i
+			}
+
+			if i <= sa.Servo11pos {
+				sa.Servo11.Angle(i)
+				sa.Servo11pos = i
+			}
+
+		case level == 3:
+			if i <= sa.Servo3pos {
+				sa.Servo3.Angle(i)
+				sa.Servo3pos = i
+			}
+
+			if i <= sa.Servo6pos {
+				sa.Servo6.Angle(i)
+				sa.Servo6pos = i
+			}
+
+			if i <= sa.Servo9pos {
+				sa.Servo9.Angle(i)
+				sa.Servo9pos = i
+			}
+
+			if i <= sa.Servo12pos {
+				sa.Servo12.Angle(i)
+				sa.Servo12pos = i
+			}
+
+		}
+		time.Sleep(mstimer * time.Millisecond)
+
+	}
+	return sa
+
+}
+
+func MoveLevelServoPositionsUp(sa model.ServoArray, level int, startpos int, setpos int, mstimer time.Duration) model.ServoArray {
+
+	for i := startpos; i <= setpos; i++ {
+
+		switch {
+		case level == 1:
+			if i >= sa.Servo1pos {
+				sa.Servo1.Angle(i)
+				sa.Servo1pos = i
+			}
+			if i >= sa.Servo4pos {
+				sa.Servo4.Angle(i)
+				sa.Servo4pos = i
+			}
+			if i >= sa.Servo7pos {
+				sa.Servo7.Angle(i)
+				sa.Servo7pos = i
+			}
+
+			if i >= sa.Servo10pos {
+				sa.Servo10.Angle(i)
+				sa.Servo10pos = i
+			}
+
+		case level == 2:
+			if i >= sa.Servo2pos {
+				sa.Servo2.Angle(i)
+				sa.Servo2pos = i
+
+			}
+			if i >= sa.Servo5pos {
+				sa.Servo5.Angle(i)
+				sa.Servo5pos = i
+			}
+
+			if i >= sa.Servo8pos {
+				sa.Servo8.Angle(i)
+				sa.Servo8pos = i
+			}
+
+			if i >= sa.Servo11pos {
+				sa.Servo11.Angle(i)
+				sa.Servo11pos = i
+			}
+
+		case level == 3:
+			if i >= sa.Servo3pos {
+				sa.Servo3.Angle(i)
+				sa.Servo3pos = i
+			}
+
+			if i >= sa.Servo6pos {
+				sa.Servo6.Angle(i)
+				sa.Servo6pos = i
+			}
+
+			if i >= sa.Servo9pos {
+				sa.Servo9.Angle(i)
+				sa.Servo9pos = i
+			}
+
+			if i >= sa.Servo12pos {
+				sa.Servo12.Angle(i)
+				sa.Servo12pos = i
+			}
+
+		}
+		time.Sleep(mstimer * time.Millisecond)
+
+	}
+	return sa
+
+}
