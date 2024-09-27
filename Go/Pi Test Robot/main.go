@@ -94,7 +94,7 @@ func main() {
 		})
 		// ------------------------------------------------ Servo Test
 		http.HandleFunc("/servotest4", func(w http.ResponseWriter, r *http.Request) {
-			sa[0] = servo.MoveLevelServoPositionsDown(sa[0], 1, 65, 0, 100)
+			sa[0] = servo.MoveLevelServoPositionsDown(sa[0], 1, 65, 40, 100)
 			xdata := html.ServoTest(xip, sa[0])
 			fmt.Fprint(w, xdata)
 		})
@@ -106,7 +106,7 @@ func main() {
 		})
 		// ------------------------------------------------ Servo Test
 		http.HandleFunc("/servotest6", func(w http.ResponseWriter, r *http.Request) {
-			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 1, 65, 80, 100)
+			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 1, 65, 130, 100)
 			xdata := html.ServoTest(xip, sa[0])
 			fmt.Fprint(w, xdata)
 		})
