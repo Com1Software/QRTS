@@ -158,11 +158,11 @@ func MoveLevelServoPositionsUp(sa model.ServoArray, level int, startpos int, set
 		switch {
 		case level == 1:
 			if i >= sa.Servo1pos {
-				sa.Servo1.Angle(i)
+				sa.Servo1.Angle(ReversePosition(i))
 				sa.Servo1pos = i
 			}
 			if i >= sa.Servo4pos {
-				sa.Servo4.Angle(ReversePosition(i))
+				sa.Servo4.Angle(i)
 				sa.Servo4pos = i
 			}
 			if i >= sa.Servo7pos {
@@ -177,12 +177,12 @@ func MoveLevelServoPositionsUp(sa model.ServoArray, level int, startpos int, set
 
 		case level == 2:
 			if i >= sa.Servo2pos {
-				sa.Servo2.Angle(i)
+				sa.Servo2.Angle(ReversePosition(i))
 				sa.Servo2pos = i
 
 			}
 			if i >= sa.Servo5pos {
-				sa.Servo5.Angle(ReversePosition(i))
+				sa.Servo5.Angle(i)
 				sa.Servo5pos = i
 			}
 
