@@ -10,7 +10,7 @@ import (
 )
 
 // ----------------------------------------------------------------
-func ServoTest(xip string, sa model.ServoArray) string {
+func ServoTest(xip string, sa model.ServoArray, name string) string {
 
 	//----------------------------------------------------------------------------
 	xdata := "<!DOCTYPE html>"
@@ -37,12 +37,30 @@ func ServoTest(xip string, sa model.ServoArray) string {
 	xdata = xdata + "</head>"
 	//------------------------------------------------------------------------
 	xdata = xdata + "<body onload='startTime()'>"
+	xdata = xdata + "<fieldset>"
+	xdata = xdata + "<legend>"
+	xdata = xdata + name
+
+	xdata = xdata + "</legend>"
+
 	xdata = xdata + "<p>Pi Test Robot</p>"
 	xdata = xdata + "<div id='txtdt'></div>"
 	//---------
 	xdata = xdata + "<BR>  <A HREF='http://" + xip + ":8080'> [ Return to Start Page ] </A>  <BR><BR>"
 	xdata = xdata + "  <A HREF='https://github.com/Com1Software/QRTS'> [ QRTS GitHub Repository ] </A>  "
 	xdata = xdata + "<BR><BR>"
+	xdata = xdata + "<table>"
+	xdata = xdata + "<td width='50'>"
+
+	xdata = xdata + "Leg 1<BR><BR><BR><BR>"
+	xdata = xdata + "Leg 2<BR><BR><BR><BR>"
+	xdata = xdata + "Leg 3<BR><BR><BR><BR>"
+	xdata = xdata + "Leg 4<BR><BR>"
+
+	xdata = xdata + "</td>"
+
+	xdata = xdata + "<td width='200'>"
+
 	xdata = xdata + "Servo 1 Position " + strconv.Itoa(sa.Servo1pos) + "<BR>"
 	xdata = xdata + "Servo 2 Position " + strconv.Itoa(sa.Servo2pos) + "<BR>"
 	xdata = xdata + "Servo 3 Position " + strconv.Itoa(sa.Servo3pos) + "<BR><BR>"
@@ -55,6 +73,12 @@ func ServoTest(xip string, sa model.ServoArray) string {
 	xdata = xdata + "Servo 10 Position " + strconv.Itoa(sa.Servo10pos) + "<BR>"
 	xdata = xdata + "Servo 11 Position " + strconv.Itoa(sa.Servo11pos) + "<BR>"
 	xdata = xdata + "Servo 12 Position " + strconv.Itoa(sa.Servo12pos) + "<BR><BR>"
+
+	xdata = xdata + "</td>"
+
+	xdata = xdata + "</table>"
+
+	xdata = xdata + "</fieldset>"
 
 	xdata = xdata + "Pi Test Robot"
 	//------------------------------------------------------------------------
@@ -93,12 +117,12 @@ func InitPage(xip string) string {
 	xdata = xdata + "<BR> Machine IP : " + xxip + "</p>"
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/about'> [ About ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/test'> [ Testing ] </A><BR>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest1'> [ Servo Test 1 ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest2'> [ Servo Test 2 ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest3'> [ Servo Test 3 ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest4'> [ Servo Test 4 ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest5'> [ Servo Test 5 ] </A>  "
-	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest6'> [ Servo Test 6 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest1?name=Servo Test 1'> [ Servo Test 1 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest2?name=Servo Test 2''> [ Servo Test 2 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest3?name=Servo Test 3''> [ Servo Test 3 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest4?name=Servo Test 4''> [ Servo Test 4 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest5?name=Servo Test 5''> [ Servo Test 5 ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest6?name=Servo Test 6''> [ Servo Test 6 ] </A>  "
 
 	xdata = xdata + "<BR><BR>Pi Test Robot"
 	//------------------------------------------------------------------------
