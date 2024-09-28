@@ -77,37 +77,43 @@ func main() {
 		//------------------------------------------------ Servo Test
 		http.HandleFunc("/servotest1", func(w http.ResponseWriter, r *http.Request) {
 			sa[0] = servo.SetAllServoPositions(sa[0], 65)
-			xdata := html.ServoTest(xip, sa[0])
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
 			fmt.Fprint(w, xdata)
 		})
 		// ------------------------------------------------ Servo Test
 		http.HandleFunc("/servotest2", func(w http.ResponseWriter, r *http.Request) {
 			sa[0] = servo.SetLevelServoPositions(sa[0], 115, 3)
-			xdata := html.ServoTest(xip, sa[0])
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
 			fmt.Fprint(w, xdata)
 		})
 		// ------------------------------------------------ Servo Test
 		http.HandleFunc("/servotest3", func(w http.ResponseWriter, r *http.Request) {
 			sa[0] = servo.MoveLevelServoPositionsDown(sa[0], 2, 65, 0, 100)
-			xdata := html.ServoTest(xip, sa[0])
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
 			fmt.Fprint(w, xdata)
 		})
 		// ------------------------------------------------ Servo Test
 		http.HandleFunc("/servotest4", func(w http.ResponseWriter, r *http.Request) {
 			sa[0] = servo.MoveLevelServoPositionsDown(sa[0], 1, 65, 40, 100)
-			xdata := html.ServoTest(xip, sa[0])
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
 			fmt.Fprint(w, xdata)
 		})
 		// ------------------------------------------------ Servo Test
 		http.HandleFunc("/servotest5", func(w http.ResponseWriter, r *http.Request) {
 			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 2, 65, 130, 100)
-			xdata := html.ServoTest(xip, sa[0])
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
 			fmt.Fprint(w, xdata)
 		})
 		// ------------------------------------------------ Servo Test
 		http.HandleFunc("/servotest6", func(w http.ResponseWriter, r *http.Request) {
 			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 1, 65, 130, 100)
-			xdata := html.ServoTest(xip, sa[0])
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
 			fmt.Fprint(w, xdata)
 		})
 
