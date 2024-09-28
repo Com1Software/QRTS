@@ -57,15 +57,7 @@ func SetLevelServoPositions(sa model.ServoArray, setpos int, level int) model.Se
 }
 
 func ReversePosition(pos int) int {
-	rpos := 0
-	switch {
-	case pos > 65:
-		rpos = pos - 65
-	case pos < 65:
-		rpos = 130 - pos
-	default:
-		rpos = pos
-	}
+	rpos := 130 - pos
 	return rpos
 }
 
