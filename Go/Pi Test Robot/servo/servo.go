@@ -224,3 +224,101 @@ func MoveLevelServoPositionsUp(sa model.ServoArray, level int, startpos int, set
 	return sa
 
 }
+
+func MoveLevelServo1and2PositionsDown(sa model.ServoArray, startpos int, setpos int, mstimer time.Duration) model.ServoArray {
+
+	for i := startpos; i >= setpos; i-- {
+
+		if i <= ReversePosition(sa.Servo1pos) {
+			sa.Servo1.Angle(ReversePosition(i))
+			sa.Servo1pos = ReversePosition(i)
+		}
+
+		if i <= sa.Servo4pos {
+			sa.Servo4.Angle(i)
+			sa.Servo4pos = i
+		}
+
+		if i <= ReversePosition(sa.Servo7pos) {
+			sa.Servo7.Angle(ReversePosition(i))
+			sa.Servo7pos = ReversePosition(i)
+		}
+		if i <= sa.Servo10pos {
+			sa.Servo10.Angle(i)
+			sa.Servo10pos = i
+		}
+
+		if i <= sa.Servo2pos {
+			sa.Servo2.Angle(i)
+			sa.Servo2pos = i
+
+		}
+		if i <= ReversePosition(sa.Servo5pos) {
+			sa.Servo5.Angle(ReversePosition(i))
+			sa.Servo5pos = ReversePosition(i)
+		}
+
+		if i <= sa.Servo8pos {
+			sa.Servo8.Angle(i)
+			sa.Servo8pos = i
+		}
+
+		if i <= ReversePosition(sa.Servo11pos) {
+			sa.Servo11.Angle(ReversePosition(i))
+			sa.Servo11pos = ReversePosition(i)
+		}
+
+		time.Sleep(mstimer * time.Millisecond)
+
+	}
+	return sa
+
+}
+
+func MoveLevelServo1and2PositionsUp(sa model.ServoArray, startpos int, setpos int, mstimer time.Duration) model.ServoArray {
+
+	for i := startpos; i <= setpos; i++ {
+		if i >= ReversePosition(sa.Servo1pos) {
+			sa.Servo1.Angle(ReversePosition(i))
+			sa.Servo1pos = ReversePosition(i)
+		}
+		if i >= sa.Servo4pos {
+			sa.Servo4.Angle(i)
+			sa.Servo4pos = i
+		}
+		if i >= ReversePosition(sa.Servo7pos) {
+			sa.Servo7.Angle(ReversePosition(i))
+			sa.Servo7pos = ReversePosition(i)
+		}
+
+		if i >= sa.Servo10pos {
+			sa.Servo10.Angle(i)
+			sa.Servo10pos = i
+		}
+
+		if i >= sa.Servo2pos {
+			sa.Servo2.Angle(i)
+			sa.Servo2pos = i
+
+		}
+		if i >= ReversePosition(sa.Servo5pos) {
+			sa.Servo5.Angle(ReversePosition(i))
+			sa.Servo5pos = ReversePosition(i)
+		}
+
+		if i >= sa.Servo8pos {
+			sa.Servo8.Angle(i)
+			sa.Servo8pos = i
+		}
+
+		if i >= ReversePosition(sa.Servo11pos) {
+			sa.Servo11.Angle(ReversePosition(i))
+			sa.Servo11pos = ReversePosition(i)
+		}
+
+		time.Sleep(mstimer * time.Millisecond)
+
+	}
+	return sa
+
+}
