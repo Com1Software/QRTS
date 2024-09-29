@@ -227,8 +227,8 @@ func MoveLevelServoPositionsUp(sa model.ServoArray, level int, startpos int, set
 
 func MoveServo1and2BiDirectionalPositionDown(sa model.ServoArray, startpos int, setpos int, bistartpos int, bisetpos int, mstimer time.Duration) model.ServoArray {
 	ii := bistartpos
-	for i := startpos; i >= setpos; i-- {
 
+	for i := startpos; i >= setpos; i-- {
 		if i <= ReversePosition(sa.Servo1pos) {
 			sa.Servo1.Angle(ReversePosition(ii))
 			sa.Servo1pos = ReversePosition(ii)
