@@ -225,27 +225,27 @@ func MoveLevelServoPositionsUp(sa model.ServoArray, level int, startpos int, set
 
 }
 
-func MoveLevelServo1and2PositionsDown(sa model.ServoArray, startpos int, setpos int, mstimer time.Duration) model.ServoArray {
-
+func MoveServo1and2BiDirectionalPositionDown(sa model.ServoArray, startpos int, setpos int, bistartpos int, bisetpos int, mstimer time.Duration) model.ServoArray {
+	ii := bistartpos
 	for i := startpos; i >= setpos; i-- {
 
 		if i <= ReversePosition(sa.Servo1pos) {
-			sa.Servo1.Angle(ReversePosition(i))
-			sa.Servo1pos = ReversePosition(i)
+			sa.Servo1.Angle(ReversePosition(ii))
+			sa.Servo1pos = ReversePosition(ii)
 		}
 
 		if i <= sa.Servo4pos {
-			sa.Servo4.Angle(i)
-			sa.Servo4pos = i
+			sa.Servo4.Angle(ii)
+			sa.Servo4pos = ii
 		}
 
 		if i <= ReversePosition(sa.Servo7pos) {
-			sa.Servo7.Angle(ReversePosition(i))
-			sa.Servo7pos = ReversePosition(i)
+			sa.Servo7.Angle(ReversePosition(ii))
+			sa.Servo7pos = ReversePosition(ii)
 		}
 		if i <= sa.Servo10pos {
-			sa.Servo10.Angle(i)
-			sa.Servo10pos = i
+			sa.Servo10.Angle(ii)
+			sa.Servo10pos = ii
 		}
 
 		if i <= sa.Servo2pos {
@@ -267,7 +267,7 @@ func MoveLevelServo1and2PositionsDown(sa model.ServoArray, startpos int, setpos 
 			sa.Servo11.Angle(ReversePosition(i))
 			sa.Servo11pos = ReversePosition(i)
 		}
-
+		ii++
 		time.Sleep(mstimer * time.Millisecond)
 
 	}
@@ -275,7 +275,7 @@ func MoveLevelServo1and2PositionsDown(sa model.ServoArray, startpos int, setpos 
 
 }
 
-func MoveLevelServo1and2PositionsUp(sa model.ServoArray, startpos int, setpos int, mstimer time.Duration) model.ServoArray {
+func MoveServo1and2BiDirectionalPositionUp(sa model.ServoArray, startpos int, setpos int, bistartpos int, bisetpos int, mstimer time.Duration) model.ServoArray {
 
 	for i := startpos; i <= setpos; i++ {
 		if i >= ReversePosition(sa.Servo1pos) {
