@@ -138,7 +138,8 @@ func main() {
 		})
 		// ------------------------------------------------ Move Lay
 		http.HandleFunc("/movelay", func(w http.ResponseWriter, r *http.Request) {
-			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 1, 65, 130, 100)
+			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 2, 0, 65, 100)
+			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 1, 40, 65, 100)
 			name := r.URL.Query().Get("name")
 			xdata := html.ServoTest(xip, sa[0], name)
 			fmt.Fprint(w, xdata)
