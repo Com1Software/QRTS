@@ -123,6 +123,11 @@ func InitPage(xip string) string {
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest4?name=Servo Test 4''> [ Servo Test 4 ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest5?name=Servo Test 5''> [ Servo Test 5 ] </A>  "
 	xdata = xdata + "  <A HREF='http://" + xip + ":8080/servotest6?name=Servo Test 6''> [ Servo Test 6 ] </A>  "
+	xdata = xdata + "<BR><HR><BR>"
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/setstand?name=Set Stand'> [ Set Stand ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/movestand?name=Move Stand'> [ Move Stand ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/movelay?name=Move Lay'> [ Move Lay ] </A>  "
+	xdata = xdata + "  <A HREF='http://" + xip + ":8080/movesit?name=Move Sit'> [ Move Sit ] </A>  "
 
 	xdata = xdata + "<BR><BR>Pi Test Robot"
 	//------------------------------------------------------------------------
