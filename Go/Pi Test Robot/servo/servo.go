@@ -229,21 +229,21 @@ func MoveServo1and2BiDirectionalPositionDown(sa model.ServoArray, startpos int, 
 	ii := bistartpos
 
 	for i := startpos; i >= setpos; i-- {
-		if i <= ReversePosition(sa.Servo1pos) {
+		if i >= ReversePosition(sa.Servo1pos) {
 			sa.Servo1.Angle(ReversePosition(i))
 			sa.Servo1pos = ReversePosition(i)
 		}
 
-		if i <= sa.Servo4pos {
+		if i >= sa.Servo4pos {
 			sa.Servo4.Angle(i)
 			sa.Servo4pos = i
 		}
 
-		if i <= ReversePosition(sa.Servo7pos) {
+		if i >= ReversePosition(sa.Servo7pos) {
 			sa.Servo7.Angle(ReversePosition(i))
 			sa.Servo7pos = ReversePosition(i)
 		}
-		if i <= sa.Servo10pos {
+		if i >= sa.Servo10pos {
 			sa.Servo10.Angle(i)
 			sa.Servo10pos = i
 		}
