@@ -138,7 +138,7 @@ func main() {
 		})
 		// ------------------------------------------------ Move Lay
 		http.HandleFunc("/movelay", func(w http.ResponseWriter, r *http.Request) {
-			sa[0] = servo.MoveLevelServo1and2PositionsUp(sa[0], 0, 65, 100)
+			sa[0] = servo.MoveServo1and2BiDirectionalPositionDown(sa[0], 0, 65, 0, 65, 100)
 			//			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 2, 0, 65, 100)
 			//			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 1, 40, 65, 100)
 			name := r.URL.Query().Get("name")
