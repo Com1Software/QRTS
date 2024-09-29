@@ -117,6 +117,40 @@ func main() {
 			fmt.Fprint(w, xdata)
 		})
 
+		// ------------------------------------------------ Set Stand
+		http.HandleFunc("/setstand", func(w http.ResponseWriter, r *http.Request) {
+			sa[0] = servo.SetLevelServoPositions(sa[0], 65, 3)
+			sa[0] = servo.SetLevelServoPositions(sa[0], 0, 2)
+			sa[0] = servo.SetLevelServoPositions(sa[0], 40, 1)
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
+			fmt.Fprint(w, xdata)
+		})
+
+		// ------------------------------------------------ Move Stand
+		http.HandleFunc("/movestand", func(w http.ResponseWriter, r *http.Request) {
+			sa[0] = servo.SetAllServoPositions(sa[0], 65)
+			sa[0] = servo.MoveLevelServoPositionsDown(sa[0], 2, 65, 0, 100)
+			sa[0] = servo.MoveLevelServoPositionsDown(sa[0], 1, 65, 40, 100)
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
+			fmt.Fprint(w, xdata)
+		})
+		// ------------------------------------------------ Move Lay
+		http.HandleFunc("/movelay", func(w http.ResponseWriter, r *http.Request) {
+			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 1, 65, 130, 100)
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
+			fmt.Fprint(w, xdata)
+		})
+		// ------------------------------------------------ Move Sit
+		http.HandleFunc("/movesit", func(w http.ResponseWriter, r *http.Request) {
+			sa[0] = servo.MoveLevelServoPositionsUp(sa[0], 1, 65, 130, 100)
+			name := r.URL.Query().Get("name")
+			xdata := html.ServoTest(xip, sa[0], name)
+			fmt.Fprint(w, xdata)
+		})
+
 		//------------------------------------------------- Start Server
 		utils.Openbrowser(xip + ":" + port)
 		if err := http.ListenAndServe(xip+":"+port, nil); err != nil {
