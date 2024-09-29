@@ -33,16 +33,16 @@ func SetAllServoPositions(sa model.ServoArray, setpos int) model.ServoArray {
 func SetLevelServoPositions(sa model.ServoArray, setpos int, level int) model.ServoArray {
 	switch {
 	case level == 1:
-		sa.Servo1pos = setpos
+		sa.Servo1pos = ReversePosition(setpos)
 		sa.Servo4pos = setpos
-		sa.Servo7pos = setpos
+		sa.Servo7pos = ReversePosition(setpos)
 		sa.Servo10pos = setpos
 
 	case level == 2:
 		sa.Servo2pos = setpos
-		sa.Servo5pos = setpos
+		sa.Servo5pos = ReversePosition(setpos)
 		sa.Servo8pos = setpos
-		sa.Servo11pos = setpos
+		sa.Servo11pos = ReversePosition(setpos)
 
 	case level == 3:
 		sa.Servo3pos = setpos
