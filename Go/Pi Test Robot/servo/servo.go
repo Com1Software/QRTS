@@ -230,42 +230,42 @@ func MoveServo1and2BiDirectionalPositionDown(sa model.ServoArray, startpos int, 
 
 	for i := startpos; i >= setpos; i-- {
 		if i <= ReversePosition(sa.Servo1pos) {
-			sa.Servo1.Angle(ReversePosition(ii))
-			sa.Servo1pos = ReversePosition(ii)
+			sa.Servo1.Angle(ReversePosition(i))
+			sa.Servo1pos = ReversePosition(i)
 		}
 
 		if i <= sa.Servo4pos {
-			sa.Servo4.Angle(ii)
-			sa.Servo4pos = ii
+			sa.Servo4.Angle(i)
+			sa.Servo4pos = i
 		}
 
 		if i <= ReversePosition(sa.Servo7pos) {
-			sa.Servo7.Angle(ReversePosition(ii))
-			sa.Servo7pos = ReversePosition(ii)
+			sa.Servo7.Angle(ReversePosition(i))
+			sa.Servo7pos = ReversePosition(i)
 		}
 		if i <= sa.Servo10pos {
-			sa.Servo10.Angle(ii)
-			sa.Servo10pos = ii
+			sa.Servo10.Angle(i)
+			sa.Servo10pos = i
 		}
 
 		if i <= sa.Servo2pos {
-			sa.Servo2.Angle(i)
-			sa.Servo2pos = i
+			sa.Servo2.Angle(ii)
+			sa.Servo2pos = ii
 
 		}
 		if i <= ReversePosition(sa.Servo5pos) {
-			sa.Servo5.Angle(ReversePosition(i))
-			sa.Servo5pos = ReversePosition(i)
+			sa.Servo5.Angle(ReversePosition(ii))
+			sa.Servo5pos = ReversePosition(ii)
 		}
 
 		if i <= sa.Servo8pos {
-			sa.Servo8.Angle(i)
-			sa.Servo8pos = i
+			sa.Servo8.Angle(ii)
+			sa.Servo8pos = ii
 		}
 
 		if i <= ReversePosition(sa.Servo11pos) {
-			sa.Servo11.Angle(ReversePosition(i))
-			sa.Servo11pos = ReversePosition(i)
+			sa.Servo11.Angle(ReversePosition(ii))
+			sa.Servo11pos = ReversePosition(ii)
 		}
 		ii++
 		time.Sleep(mstimer * time.Millisecond)
